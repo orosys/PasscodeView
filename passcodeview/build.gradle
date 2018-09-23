@@ -30,6 +30,19 @@ android {
 
         consumerProguardFiles 'proguard-rules.pro'
     }
+    buildTypes {
+        release {
+            debuggable false
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        unsigned {
+            debuggable false
+        }
+        debug {
+            debuggable true
+        }
+    }
 }
 
 configurations {
@@ -37,7 +50,7 @@ configurations {
 }
 
 dependencies {
-    implementation 'com.android.support:support-annotations:27.1.1'
-    javadocDeps 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.android.support:support-annotations:+'
+    javadocDeps 'com.android.support:support-annotations:+'
 }
-apply from: '../bintray.gradle'
+

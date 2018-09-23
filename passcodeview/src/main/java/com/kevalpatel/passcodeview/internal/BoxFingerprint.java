@@ -144,7 +144,7 @@ final class BoxFingerprint extends Box implements FingerPrintAuthHelper.FingerPr
         //Initialize the finger print reader.
         if (isFingerPrintBoxVisible) {
             mFingerPrintAuthHelper = new FingerPrintAuthHelper(getContext(), this);
-            mFingerPrintAuthHelper.startAuth();
+//            startAuth();
         }
     }
 
@@ -335,8 +335,17 @@ final class BoxFingerprint extends Box implements FingerPrintAuthHelper.FingerPr
 
     @Override
     public void reset() {
-        if (mFingerPrintAuthHelper != null && mFingerPrintAuthHelper.isScanning())
+        if (mFingerPrintAuthHelper != null && !isFingerPrintEnable()) {
             mFingerPrintAuthHelper.stopAuth();
+        } else {
+            startAuth();
+        }
+    }
+
+    private void startAuth() {
+        if (mFingerPrintAuthHelper != null && !mFingerPrintAuthHelper.isScanning() && isFingerPrintEnable()) {
+            mFingerPrintAuthHelper.startAuth();
+        }
     }
 
     ///////////////// FINGERPRINT AUTHENTICATION CALLBACKS. //////////////
